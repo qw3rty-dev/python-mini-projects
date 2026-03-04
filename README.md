@@ -3,6 +3,8 @@ This repository contains small beginner-level Python projects created while lear
 ## Projects:
 - Calculator (addition,subtraction,multiplication,division, factorial)
 - Compare Numbers(>,<,=)
+- Between_Numbers
+- Rock_Paper_Scissors
 
 ## Concepts used:
 - Condtional statements
