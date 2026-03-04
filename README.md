@@ -4,10 +4,11 @@ This repository contains small beginner-level Python projects created while lear
 - Calculator (addition,subtraction,multiplication,division, factorial)
 - Compare Numbers(>,<,=)
 - Between_Numbers
-- Rock_Paper_Scissors(best of three logic)
+- Rock Paper Scissors(best of three logic)
+- Number guessing game
 
 ## Concepts used:
-- Condtional statements
+- Conditional statements
 - Loops
 - Functions
 - Exception handling
