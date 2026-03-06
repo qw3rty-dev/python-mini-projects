@@ -23,7 +23,7 @@ def play_game():
             while True:
                 try:
                     guess=int(input(f"Guess {i+1}: "))
-                    if guess in range(1,20):
+                    if guess in range(1,21):
                         break
                     else:
                         print("Enter a number from 1 to 20")
