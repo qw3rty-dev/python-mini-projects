@@ -1,47 +1,49 @@
 from random import randint
-def hint(num,guess):
-        
 
-    if(num==guess):
-        print(f"Congrats,You guessed it right,it was {num}")
-        return True
-    diff=abs(num-guess)
-    if(diff<=2):
-        print("Very close")
-    elif( diff<=5):
-        print("Close")
-    else:
-        print("Try again")
-    return False
-def play_game():
+def guessGame():
     while True:
-        print("Number Guessing game ")
-        print("You will be given 3 chances to guess the number ranging between 1 to 20")
-
-        num=random.randint(1,20)
-        for i in range(3):
+        print("\t\t\t\t\t===GUESSING GAME===\n" 
+        "\t\t\t\t Guess the number ranging between 1 to 20\n"
+        "\t\t\t\t           You have 3 chances")
+        num=randint(1,20)
+        print(num)
+        for i in range(1,4):
             while True:
-                try:
-                    guess=int(input(f"Guess {i+1}: "))
+                 try:
+                    guess=int(input(f"Guess {i}: "))
                     if guess in range(1,21):
-                        break
+                         break
                     else:
-                        print("Enter a number from 1 to 20")
-                except ValueError:
-                    print("Enter an integer")
-
-            
-            if hint(num,guess):
+                         print("Enter a number ranging between 1 to 20")
+                         
+                 except ValueError:
+                    print("Invalid input")
+            if logic(num,guess):
                 break
         else:
-            print("Sorry,you have used all ur guesses")
-
+            print("\nYou have used all your guesses")
         print(f"The number was {num}")
-        print("Do you wish to replay >> Yes or no(enter any random str): ",end="")
-        z=input()
-        if z.lower().strip()!="yes":
+        
+        re = input("\nReplay? (yes/no): ").lower().strip()
+        if re!="yes":
+            print("\nProgram ended")
             break
+
+      
+def logic(num,guess):
+    if num==guess:
+        print(f"\n🎊🎊 Congrats,You guessed it right 🎊🎊")
+        return True
+    if abs(num-guess)<=3:
+        print("Very close")
+    elif abs(num-guess)<=5:
+        print("Close")
+    else:
+        print("Not even close")
+    return False
+
+    
 
 
 if __name__=="__main__":
-    play_game()
+    guessGame()
