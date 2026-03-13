@@ -1,51 +1,54 @@
 import random
 
-print("Rock Paper Scissors")
 def rps():
-    d1={"rock":1,"paper":2,"scissors":3}
-    rd1={1:"Rock",2:"Paper",3:"Scissors"}
+        
+    result={"rock":"paper","paper":"scissors","scissors":"rock"}
+    emoji={"rock":"👊","paper":"🤚","scissors":"✂️"}
     while True:
-        choice=input("Choose Rock,Paper or Scissors: ").lower().strip()
-        if choice in d1:
+        choice=input("\nChoose Rock,Paper or Scissors: ").lower().strip()
+        if choice in result:
             break
         print("Invalid Input")
-            
-    user_input= d1[choice]
-    computer=random.randint(1,3)
+        
+    computer=random.choice(list(result.keys()))
+    print(f"\nYou:{choice.capitalize()}{emoji[choice]}  Computer:{computer.capitalize()}{emoji[computer]}")
 
-    print(f"You:{rd1[user_input]}  Computer:{rd1[computer]}")
-    
-
-
-
-    if computer==user_input:
+    if computer==choice:
         print("It's a draw")
         return 0,0
-    elif (user_input == 1 and computer == 3) or \
-     (user_input == 2 and computer == 1) or \
-     (user_input == 3 and computer == 2):
+    
+    elif result[computer]==choice:
         print("You won")
         return 1,0
     else:
         print("You lose")
         return 0,1
+    
 def play_game():
-    print("Best of three")
-    won=0
-    lose=0
-    round_no=0
-    while won<2 and lose<2:
-        w,l=rps()
-        won+=w
-        lose+=l
-        round_no+=1
-        print(f"Round {round_no} results >>> Computer:{lose}  You:{won}")
+    while True:
+        print("\n \t\t\t\t===ROCK PAPER SCISSORS===\n"
+            "    \t\t\t\t     (BEST OF THREE)")  
+        won=0
+        lose=0
+        round_no=0
+        while won<2 and lose<2:
+            w,l=rps()
+            won+=w
+            lose+=l
+            round_no+=1
+            print(f"Round {round_no} results >>>  Computer:{lose} | You:{won}")
+            
+        if won==2:
+            print("\n🎊🎊 Congrats,You won 🎊🎊")
+        else:
+            print("\nYou lose,Try again")
         
-
-    if won==2:
-        print("Congrats you won")
-    else:
-        print("You lose,Try again")
+        replay=input("\nReplay (yes/no)?: ").lower().strip()
+        if replay!="yes": 
+             print("Program ended")
+             break    
+          
+        
 
 if __name__=="__main__":
     play_game()
