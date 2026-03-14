@@ -21,6 +21,10 @@ def main():
          elif choice==7:
              remove_completed(tasks)
          elif choice==8:
+             edit_tasks(tasks)
+         elif choice==9:
+             search_tasks(tasks)
+         elif choice==10:
              break
          save_tasks(tasks)
 
@@ -33,13 +37,15 @@ def menu():
        "4.) Show pending tasks\n"
        "5.) Show completed tasks\n"
        "6.) Remove task\n"
-       "7.) Remove all completed tasks\n"
-       "8.) Exit")
+       "7.) Remove all completed tasks\n" 
+       "8.) Edit task\n"
+       "9.) Search task\n"
+       "10.) Exit\n")
    while True:
         choice = inputFN("Enter your choice: ")
-        if 1 <= choice <= 8:
+        if 1 <= choice <= 10:
             return choice
-        print("Choose between 1-8")
+        print("Choose between 1-9")
 
 def add_task(tasks):                                     
     task=input("Enter task: ")
@@ -48,10 +54,12 @@ def add_task(tasks):
         print("Task already exists")
     else:
         while True:
-            priority = input("Priority (High/Medium/Low): ").lower()
-            if priority in ["high","medium","low"]:
+            priority = input("Priority (High/Medium/Low): ").lower().strip()
+            if priority in ["high","medium","low",'']:
+                if priority=='':
+                    priority="low"
                 break
-            print("Invalid input")
+            print("Invalid input | (High/Medium/Low) ")
 
         tasks.append({"task":task.capitalize(),"done":False,"priority":priority.capitalize()})
         print("Task added")
@@ -77,7 +85,8 @@ def show_tasks(tasks):
     
     for i,t in enumerate(tasks):
         status = "✅" if t["done"] else "❌"
-        print(f"{i+1}.) {status}  {t['task']:<20} | Priority:{t['priority']}")
+        print(f"{i+1}.) [{status}] {t['task']:<20} | Priority: {t['priority']}")
+
 
 
 def completed_tasks(tasks):
@@ -101,6 +110,8 @@ def pending_tasks(tasks):
     else:
         print("No pending task(s)")
         return
+    
+
 def mark_completed(tasks):
     if not tasks:
         print("No tasks available")
@@ -108,13 +119,47 @@ def mark_completed(tasks):
     
     show_tasks(tasks)
 
-    num=inputFN("Enter the s.number of task you completed: ")
+    num=inputFN("Enter the task number that you completed: ")
     print()
     if 1 <= num <= len(tasks):
-        tasks[num-1]["done"] = True
-        print("List Updated")
+        if tasks[num-1]["done"] != True:
+            tasks[num-1]["done"] = True
+            print("List updated")
+        else:
+            print("Already marked as completed")
     else:
         print("Invalid task number")
+ 
+
+def edit_tasks(tasks):
+    if not tasks:
+        print("No tasks available")
+        return
+    show_tasks(tasks)
+    num =inputFN("Enter the task number to edit: ")
+    print()
+    if 1<= num <=len(tasks):
+        toedit=tasks[num-1]
+
+        new_name=input("Enter the new name for it: ")
+        new_priority = input("Priority (High/Medium/Low or blank): ").lower()
+        if new_priority:
+            while new_priority not in ["high","medium","low"]:
+                print("Invalid priority")
+                new_priority = input("Enter High/Medium/Low: ").lower()
+
+            toedit["priority"] = new_priority.capitalize()
+
+
+        if new_name:
+            toedit["task"]=new_name
+        if new_priority:
+            toedit["priority"]=new_priority.capitalize()
+        print("Task updated")
+    else:
+        print("Invalid task number")
+
+
 
 def remove_task(tasks):
     if not tasks:
@@ -123,7 +168,7 @@ def remove_task(tasks):
 
     show_tasks(tasks)
     
-    num=inputFN("Enter the s.number of task you want to remove: ")
+    num=inputFN("Enter the task number you want to remove: ")
     print()
     if 1 <= num <= len(tasks):
         tasks.pop(num-1)
@@ -138,9 +183,24 @@ def remove_completed(tasks):
     removed = before - len(tasks)
   
     if removed!=0:
-        print(f"{removed} completed task(s) removed")
+        print(f"{removed} completed task{'s' if removed!=1 else ''} removed")
     else:
         print("No completed tasks to remove")
+
+def search_tasks(tasks):
+    if not tasks:
+        print("No tasks available")
+        return
+    word=input("Enter Keyword: ").lower()
+    found=False
+    for i,t in enumerate(tasks):
+        if word in t["task"].lower():
+            status = "✅" if t["done"] else "❌"
+            print(f"{i+1}.) [{status}] {t['task']:<20} | Priority: {t['priority']}")
+            found=True
+    if not found:
+        print("No matching tasks")
+
     
 def inputFN(msg):
     while True:
