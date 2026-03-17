@@ -27,3 +27,4 @@ A command-line based task manager built in python that allows users to manage da
 -Add sorting(by priority or status)
 -Improve UI/formatting
 -Convert into a GUI or web app
+
