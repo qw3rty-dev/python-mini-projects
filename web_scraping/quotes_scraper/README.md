@@ -10,3 +10,4 @@ A beginner python web scraping project that extracts quotes,authors, and tags fr
 ## Tools & Libraries
 - requests
 - BeautifulSoup
+- lxml
