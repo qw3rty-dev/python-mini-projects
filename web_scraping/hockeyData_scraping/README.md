@@ -1,6 +1,9 @@
-# Hcckey Data Scraper
+# Hockey Data Scraper
 
 A python web scraping project that extracts hockey team statistics from a website and stores the data in a CSV file
+
+# Link
+https://www.scrapethissite.com/pages/forms/
 
 ## Features
 - Scrapes multiple pages automatically
