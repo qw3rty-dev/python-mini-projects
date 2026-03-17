@@ -2,6 +2,9 @@
 
 A python web scraping project that extracts book data from the website Books to Scrape.
 
+# Link
+https://books.toscrape.com/
+
 ## Features
 - Scrapes multiple pages automatically 
 - Extracts book title,price,rating,and availability 
