@@ -1,6 +1,6 @@
 # Python mini Projects
 This repository contains small command line Python projects created while learning Python and exploring real-world use cases.
-## Projects:
+## Projects
 - Calculator (Supports addition,subtraction,multiplication,division and factorial)
 - Compare Numbers(>,<,=)
 - Between_Numbers(Enter the number that comes between)
@@ -11,7 +11,7 @@ This repository contains small command line Python projects created while learni
 - Books Scraper(scrapes book title,price,rating,availability)
 - Hockey Data Scraper(scrapes team statistics like wins,losses,goals)
 
-## Concepts used:
+## Concepts used
 - Conditional statements
 - Loops
 - Functions
