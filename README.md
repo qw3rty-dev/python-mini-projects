@@ -21,7 +21,7 @@ This repository contains small command line Python projects created while learni
 - Web scraping (requests,BeautifulSoup)
 - File handling (CSV,JSON)
 
-  ## Tech used
-  - Python
-  - requests
-  - BeautifulSoup
+ ## Tech used
+ - Python
+ - requests
+ - BeautifulSoup
