@@ -20,6 +20,15 @@ A command-line based task manager built in python that allows users to manage da
 - JSON(for data storage)
 - File Handling
 
+## How it works
+
+- Tasks are stored as list of dictionaries
+- Each task contains:
+   - Task name
+   - Completion status
+   - Priority level
+- Data is saved in `tasks.json` file and loaded when the program starts
+
 ## How to run
 
 - Run the script: python todo.py
