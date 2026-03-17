@@ -11,3 +11,8 @@ A beginner python web scraping project that extracts quotes,authors, and tags fr
 - requests
 - BeautifulSoup
 - lxml
+- csv
+
+ ## How to run
+- Install required libraries(pip install....)
+- Run the script: python main.py
