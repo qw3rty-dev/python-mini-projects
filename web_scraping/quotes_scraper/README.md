@@ -2,6 +2,9 @@
 
 A beginner python web scraping project that extracts quotes,authors, and tags from a website.
 
+# Link
+https://quotes.toscrape.com
+
 ## Features
 - Multi-page scraping
 - Saves data to CSV
