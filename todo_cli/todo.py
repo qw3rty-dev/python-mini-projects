@@ -45,7 +45,7 @@ def menu():
         choice = inputFN("Enter your choice: ")
         if 1 <= choice <= 10:
             return choice
-        print("Choose between 1-9")
+        print("Choose between 1-10")
 
 def add_task(tasks):                                     
     task=input("Enter task: ")
