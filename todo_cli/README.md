@@ -4,10 +4,11 @@ A command-line based task manager built in python that allows users to manage da
 
 ## Features
 
-- Add new tasks with priority(High,medium,Low)
+- Add new tasks with priority(High,medium,Low) and due date
 - View all tasks with status and priority
 - Mark tasks as completed
 - View only completed or pending tasks
+- Sort tasks by due date and priority
 - Edit existing tasks
 - Search tasks by keyword
 - Remove individual tasks
@@ -27,6 +28,7 @@ A command-line based task manager built in python that allows users to manage da
    - Task name
    - Completion status
    - Priority level
+   - Due Date
 - Data is saved in `tasks.json` file and loaded when the program starts
 
 ## How to run
@@ -36,8 +38,6 @@ A command-line based task manager built in python that allows users to manage da
 
 ## Future improvements
 
-- Add due dates
-- Add sorting(by priority or status)
 - Improve UI/formatting
 - Convert into a GUI or web app
 
