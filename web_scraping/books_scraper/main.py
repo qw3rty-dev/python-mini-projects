@@ -5,30 +5,36 @@ import csv
 def books_scraper():
     with open("book.csv","w",encoding="utf-8-sig") as file:
         writer=csv.writer(file)
-        writer.writerow(["Bname","Price","Rating","Availability"])
+        writer.writerow(["Title","Price","Link","Rating","Availability"])
         page=1
+        base_url="https://books.toscrape.com/catalogue/"
+        url="https://books.toscrape.com/catalogue/page-1.html"
         while True:
             time.sleep(1)
-            print(f"\n>>>>> Scraping page {page}.......\n")
-            url=f"https://books.toscrape.com/catalogue/page-{page}.html"
+            print(f"\n {'='*20}Scraping page {page}{'='*20}\n")
             req=requests.get(url)
             req.encoding= "utf-8"
             soup=BeautifulSoup(req.text,"lxml")
-            books=soup.find_all("article",class_= "product_pod")
-            for i in books:
-                title=i.h3.a["title"]
-                price=i.find("p",class_="price_color").text
-                rating=i.find("p",class_="star-rating")["class"][-1]
-                availability=i.find("p",class_="instock availability").text.strip()
-                writer.writerow([title,price,rating,availability])
+            books=soup.select("article.product_pod")
+            for book in books:
+                title=book.select_one("h3 a").get("title")
+                price=book.select_one(".price_color").text
+                b_link=book.select_one(".image_container a").get("href")
+                link=base_url+b_link
+                rating=book.select_one(".star-rating").get("class")[-1]
+                avail_tag=book.select_one(".availability")
+                availability= avail_tag.text.strip() if avail_tag else "Unknown"
+                writer.writerow([title,price,link,rating,availability])
 
                 print(f"Book Title: {title}")
                 print(f"Book Price: {price}")
+                print(f"Book Link: {link}")
                 print(f"Rating: {rating}/Five")
                 print(f"Availability: {availability}")
                 print("-"*120)
-            next_page=soup.find("li",class_="next")
-            if next_page:
+            next_url=soup.select_one("ul.pager  .next a")
+            if next_url:
+                url=base_url+next_url.get("href")
                 page+=1
             else:
                 break
