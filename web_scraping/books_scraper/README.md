@@ -7,7 +7,7 @@ https://books.toscrape.com/
 
 ## Features
 - Scrapes multiple pages automatically 
-- Extracts book title,price,rating,and availability 
+- Extracts book title,price,link,rating,and availability 
 - Saves data into a CSV file
 
 ## Tools & Libraries
