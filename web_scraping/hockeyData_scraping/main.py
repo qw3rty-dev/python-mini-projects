@@ -6,21 +6,28 @@ def data_scraper():
     with open("hockey.csv","w") as file:
         writer=csv.writer(file)
         writer.writerow(["Name","Year","Win","Loss","Goal_for","Goal_against"])
-        
-        for page in range(1,25):
+        page=1
+        base_url="https://www.scrapethissite.com/"
+        while True:
             time.sleep(1)
-            print(f"\n>>>>> Scraping page {page}.......\n")
             url=f"https://www.scrapethissite.com/pages/forms/?page_num={page}"
             req=requests.get(url)
+            if req.status_code!=200:
+                print("Request failed")
+                break
             soup=BeautifulSoup(req.text,"lxml")
-            content=soup.find_all("tr",class_="team")
-            for index in content:
-                tname=index.select_one(".name").text.strip()
-                year=index.select_one(".year").text.strip()
-                win=index.select_one(".wins").text.strip()
-                loss=index.select_one(".losses").text.strip()
-                goalFor=index.select_one(".gf").text.strip()
-                goalAgainst=index.select_one(".ga").text.strip()
+            teams=soup.select(".team")
+            if not teams:
+                print("Done")
+                break
+            print(f"\n {'='*20}Page {page}{'='*20}\n")
+            for team in teams:
+                tname=team.select_one(".name").text.strip()
+                year=team.select_one(".year").text.strip()
+                win=team.select_one(".wins").text.strip()
+                loss=team.select_one(".losses").text.strip()
+                goalFor=team.select_one(".gf").text.strip()
+                goalAgainst=team.select_one(".ga").text.strip()
                 writer.writerow([tname,year,win,loss,goalFor,goalAgainst])
 
                 print(f"Team Name: {tname}")
@@ -30,6 +37,7 @@ def data_scraper():
                 print(f"Goals for: {goalFor}")
                 print(f"Goals against: {goalAgainst}")
                 print("-"*120)
+            page+=1
 
 
 
