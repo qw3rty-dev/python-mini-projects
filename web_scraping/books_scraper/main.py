@@ -13,6 +13,9 @@ def books_scraper():
             time.sleep(1)
             print(f"\n {'='*20}Scraping page {page}{'='*20}\n")
             req=requests.get(url)
+            if req.status_code!=200:
+                print("Request failed")
+                break
             req.encoding= "utf-8"
             soup=BeautifulSoup(req.text,"lxml")
             books=soup.select("article.product_pod")
