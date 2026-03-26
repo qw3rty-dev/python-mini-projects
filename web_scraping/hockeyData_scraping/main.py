@@ -3,7 +3,7 @@ import requests
 import time
 import csv
 def data_scraper():
-    with open("hockey.csv","w") as file:
+    with open("book.csv","w",encoding="utf-8-sig") as file:
         writer=csv.writer(file)
         writer.writerow(["Name","Year","Win","Loss","Goal_for","Goal_against"])
         page=1
