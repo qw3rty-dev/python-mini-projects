@@ -10,6 +10,7 @@ This repository contains small command line Python projects created while learni
 - Quotes Scraper(scrapes quotes,authors,and tags into CSV)
 - Books Scraper(scrapes book title,price,rating,availability)
 - Hockey Data Scraper(scrapes team statistics like wins,losses,goals)
+- Hacker News Scraper(scrapes headline and link of the top 10 news sorted according to the score points)
 
 ## Concepts used
 - Conditional statements
