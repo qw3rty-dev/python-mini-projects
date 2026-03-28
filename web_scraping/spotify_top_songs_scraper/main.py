@@ -20,7 +20,7 @@ print(f"{'Rank':<8} {'Title':<50} {'Artist':<20} {'Streams (B)':<14} {'Release d
 print("-"*120)
 with open("most_streamed_songs.csv", "w",newline="",encoding="utf-8") as f:
      writer = csv.writer(f)
-     writer.writerow(["Rank","Title","Artist","Streams"])
+     writer.writerow(["Rank","Title","Artist","Streams(Billions)","Release Date"])
      for rank,song in enumerate(rows):
         title_tag=song.select_one("th a")
         artist_tag=song.select_one("td a")
