@@ -7,7 +7,6 @@ def search_job(keyword,writer):
     total=0
     keyword= keyword.replace(" ","+") if " " in keyword else keyword
     url=f"https://www.python.org/search/?q={keyword}&submit="
-    print(url)
     homepage=False
     while True:
         time.sleep(1)
@@ -39,7 +38,8 @@ def search_job(keyword,writer):
              print("Reached last page")
              break
         url=urljoin(url,next_url)
-    print(f"\n Total jobs scraped: {total}")
+    print(f"\nTotal jobs scraped: {total}"+",\nNo results found." if total==0 and "No results found." not in jobs[-1].text else "")
+
 
 
 def homepage(writer):
@@ -47,21 +47,25 @@ def homepage(writer):
     url= "https://www.python.org/jobs/"
     homepage=True
     req=requests.get(url)
-    print(url)
     if req.status_code!=200:
         print("Request failed")
-
-    soup=BeautifulSoup(req.text,"lxml")
-    jobs=soup.select(".list-recent-jobs li")
-    if jobs:
-        total+=page_scraper(jobs,url,homepage,writer)
     else:
-        print("No results found.")
-    print(f"\nTotal jobs scraped: {total}")
+
+        soup=BeautifulSoup(req.text,"lxml")
+        jobs=soup.select(".list-recent-jobs li")
+        if jobs:
+            
+            total+=page_scraper(jobs,url,homepage,writer)
+        else:
+            print("No results found.")
+        print(f"\nTotal jobs scraped: {total}"+",no results found" if total==0 else "")
+        
 
     
     
 def page_scraper(jobs,url,homepage,writer):
+    
+    
     count=0
     for job in jobs:
         job_url=job.select_one(".listing-company a").get("href") if homepage else job.select_one("h3 a").get("href")
@@ -69,7 +73,6 @@ def page_scraper(jobs,url,homepage,writer):
             job_url=urljoin(url,job_url)
         else:
             continue
-        print(job_url)
        
         sub_req=requests.get(job_url) 
         if sub_req.status_code!=200:
@@ -104,7 +107,7 @@ def page_scraper(jobs,url,homepage,writer):
             location_tag =sub_soup.select_one(".listing-location")
             location=location_tag.text.strip() if location_tag else "Not specified"
             date_tag=sub_soup.select_one(".listing-posted time")
-            date=date_tag.text.strip() if location_tag else "Not available"
+            date=date_tag.text.strip() if date_tag else "Not available"
 
             writer.writerow([job_title,company_name,location,brief,date,job_url])
             count+=1
@@ -124,9 +127,11 @@ def jobs_scraper():
 
         keyword=input("Search: ")
         if keyword:
+            print("Searching......🔍")
             search_job(keyword,writer)
             
         else:
+            print("Scraping latest jobs......")
             homepage(writer)
 
 if __name__=="__main__":
