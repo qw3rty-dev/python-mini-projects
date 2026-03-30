@@ -2,6 +2,9 @@
 
 A command-line tool that scrapes live job listings from Python.org — search by keyword or browse the latest openings, all saved to a clean CSV in seconds.
 
+## Link
+https://www.python.org/jobs/
+
 ## Why This Exists
 Manually browsing job boards is slow. This tool lets you search Python.org jobs programmatically, filter by keyword, and export everything to a spreadsheet you can sort, filter, and share.
 
