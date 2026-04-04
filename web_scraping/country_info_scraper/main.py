@@ -3,7 +3,8 @@ import requests
 from bs4 import BeautifulSoup
 def scrap_country():
     url="https://www.worldometers.info/world-population/population-by-country/"
-    req=requests.get(url)
+    session=requests.Session()
+    req=session.get(url)
     if req.status_code!=200:
         print("Request failed")
     else:
@@ -21,21 +22,21 @@ def scrap_country():
             # print("-"*200)
             for country in countries[1:]:
 
-                rank=country.select(".border-e")[0].text
-                name=country.select(".border-e")[1].text
-                population=country.select(".border-e")[2].text
-                yearly_change=country.select(".border-e")[3].text
-                net_change=country.select(".border-e")[4].text
-                density=country.select(".border-e")[5].text
-                land_area=country.select(".border-e")[6].text
-                migrants=country.select(".border-e")[7].text
-                fertility_rate=country.select(".border-e")[8].text
-                median_age=country.select(".border-e")[9].text
-                urban_pop=country.select(".border-e")[10].text
-                world_share=country.select(".border-e")[11].text
+                rank=country.select(".border-e")[0].text.strip()
+                name=country.select(".border-e")[1].text.strip()
+                population=country.select(".border-e")[2].text.strip()
+                yearly_change=country.select(".border-e")[3].text.strip()
+                net_change=country.select(".border-e")[4].text.strip()
+                density=country.select(".border-e")[5].text.strip()
+                land_area=country.select(".border-e")[6].text.strip()
+                migrants=country.select(".border-e")[7].text.strip()
+                fertility_rate=country.select(".border-e")[8].text.strip()
+                median_age=country.select(".border-e")[9].text.strip()
+                urban_pop=country.select(".border-e")[10].text.strip()
+                world_share=country.select(".border-e")[11].text.strip()
                 # print(f"{rank:<8} {name:<30} {population:<20} {yearly_change:<15} {net_change:<15} {land_area:<15} {density:<15} {migrants:<15} {fertility_rate:<15} {median_age:<15} {urban_pop:<15} {world_share:<15}")
                 writer.writerow([rank,name,population,yearly_change,net_change,land_area,density,migrants,fertility_rate,median_age,urban_pop,world_share])
-            
+            print("Done")
             
             # print(density,land_area,migrants,fertility_rate,median_age,urban_pop,world_share)
             # print(rank)
