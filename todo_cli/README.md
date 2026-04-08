@@ -13,6 +13,7 @@ A command-line based task manager built in python that allows users to manage da
 - Search tasks by keyword
 - Remove individual tasks
 - Remove all completed tasks
+- Clean table-based CLI interface
 - Persistent storage using JSON
 
 ## Technologies used
@@ -43,6 +44,7 @@ todo_cli/
 |-- cli.py                     # CLI interface (menu+input)
 |-- manager.py                 # Core logic (add,remove,edit,filter,etc)
 |-- utils.py                   # Helper functions (JSON handling,input,etc)
+|-- tasks.json                 # Local data storage
 ```
 
 
