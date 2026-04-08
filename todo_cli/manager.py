@@ -3,6 +3,7 @@ from datetime import datetime,date
 HEADER=(f"\n{'Sno':<5} {'Status':<10} {'Task':<20} {'Priority':<10} {'Due Date [YYYY-MM-DD]':<12}")
 DIVIDER= "-"*70
 
+
 def print_tasks(tasks):
     print(HEADER)
     print(DIVIDER)
@@ -14,7 +15,6 @@ def print_tasks(tasks):
 
 
 def add_task(tasks):                  
-
     task=get_input("Enter task: ",max_len=20)
     if task is None:
         return          
@@ -27,7 +27,6 @@ def add_task(tasks):
         priority = get_input("Priority (High/Medium/Low): ",allow_empty=True)
         if priority is None:
             return
-        
         if priority in ["high","medium","low",'']:
             if priority=='':
                 priority="low"
@@ -42,12 +41,14 @@ def add_task(tasks):
     print("Task added successfully")
 
 
+
 def show_tasks(tasks):
     if not tasks:
         print("No tasks available")
         return
     print_tasks(tasks)
     
+
 
 def completed_tasks(tasks):
     completed=[x for x in tasks if x['done']]
@@ -57,7 +58,8 @@ def completed_tasks(tasks):
     else:
         print("No completed tasks")
         return
-    
+
+
 
 def pending_tasks(tasks):
     pending=[x for x in tasks if not x['done']]
@@ -67,7 +69,8 @@ def pending_tasks(tasks):
     else:
         print("No pending tasks")
         return
-    
+
+
 
 def mark_completed(tasks):
     show_tasks(tasks)
@@ -89,10 +92,9 @@ def mark_completed(tasks):
     
 
 def edit_tasks(tasks):
-
     show_tasks(tasks)
     while True:
-        num =get_int("\nEnter the task number to edit: ")
+        num =get_int("\nEnter the task number you want to edit: ")
         print()
         if num is None:
             return
@@ -102,7 +104,7 @@ def edit_tasks(tasks):
             new_name=get_input("Enter the new name for it [Leave it blank for no change]: ",allow_empty=True)
             if new_name is None:
                 return
-    
+
             while True:
                 new_priority = get_input("Priority (High/Medium/Low or leave it blank for no change): ",allow_empty=True)
                 if new_priority is None:
@@ -114,14 +116,14 @@ def edit_tasks(tasks):
             
             if new_due is None:
                 return                    
-    
+
             if new_name:
                 toedit["task"]=new_name.capitalize()
             if new_priority:
                 toedit["priority"]=new_priority.capitalize()
             if new_due:
                 toedit["due"]=new_due
-    
+
             if not new_name and not new_due and not new_priority:
                 print("\nNo change is done")
             else:
@@ -129,6 +131,7 @@ def edit_tasks(tasks):
             break
         else:
             print("Invalid task number,Please try again.")
+
 
 
 def remove_task(tasks):
@@ -147,7 +150,8 @@ def remove_task(tasks):
     else:
         print("Invalid task number,Please try again.")
 
-    
+
+
 def remove_completed(tasks):
     before = len(tasks)
     tasks[:] = [t for t in tasks if not t["done"]]
@@ -157,6 +161,7 @@ def remove_completed(tasks):
         print(f"{removed} completed task{'s' if removed!=1 else ''} removed")
     else:
         print("No completed tasks to remove")
+
 
 
 def search_tasks(tasks):
@@ -177,6 +182,13 @@ def sort_tasks(tasks):
     priority_order={'High':1,'Medium':2,'Low':3}
     sorted_tasks=sorted(tasks, key= lambda x:(datetime.strptime(x["due"],"%Y-%m-%d"),priority_order[x['priority']]))
     show_tasks(sorted_tasks)
+    confirm=input("Update task list with this sorted order? (y/n): ").lower().strip()
+    if confirm == "y":
+      tasks[:]=sorted_tasks
+      print("Order saved")
+    else:
+       print("No changes made")
+
 
 
 def date_format(msg,allow_empty=False):
@@ -191,6 +203,7 @@ def date_format(msg,allow_empty=False):
             return date_str.strftime("%Y-%m-%d")
         except ValueError:
             print("Invalid date format")
+
 
 
 def due_tag(due_date):
