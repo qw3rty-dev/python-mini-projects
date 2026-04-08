@@ -91,43 +91,44 @@ def mark_completed(tasks):
 def edit_tasks(tasks):
 
     show_tasks(tasks)
-    num =get_int("\nEnter the task number to edit: ")
-    print()
-    if num is None:
-        return
-    
-    if 1<= num <=len(tasks):
-        toedit=tasks[num-1]
-        new_name=get_input("Enter the new name for it [Leave it blank for no change]: ",allow_empty=True)
-        if new_name is None:
+    while True:
+        num =get_int("\nEnter the task number to edit: ")
+        print()
+        if num is None:
             return
-
-        while True:
-            new_priority = get_input("Priority (High/Medium/Low or leave it blank for no change): ",allow_empty=True)
-            if new_priority is None:
+        
+        if 1<= num <=len(tasks):
+            toedit=tasks[num-1]
+            new_name=get_input("Enter the new name for it [Leave it blank for no change]: ",allow_empty=True)
+            if new_name is None:
                 return
-            if new_priority in ["high","medium","low",'']:
-                break
-            print("Invalid input | (High/Medium/Low) ")
-        new_due= date_format("Enter due date (YYYY-MM-DD) or leave it blank for no change: ",allow_empty=True)
-        
-        if new_due is None:
-            return                    
-
-        if new_name:
-            toedit["task"]=new_name.capitalize()
-        if new_priority:
-            toedit["priority"]=new_priority.capitalize()
-        if new_due:
-            toedit["due"]=new_due
-
-        if not new_name and not new_due and not new_priority:
-            print("\nNo change is done")
+    
+            while True:
+                new_priority = get_input("Priority (High/Medium/Low or leave it blank for no change): ",allow_empty=True)
+                if new_priority is None:
+                    return
+                if new_priority in ["high","medium","low",'']:
+                    break
+                print("Invalid input | (High/Medium/Low) ")
+            new_due= date_format("Enter due date (YYYY-MM-DD) or leave it blank for no change: ",allow_empty=True)
+            
+            if new_due is None:
+                return                    
+    
+            if new_name:
+                toedit["task"]=new_name.capitalize()
+            if new_priority:
+                toedit["priority"]=new_priority.capitalize()
+            if new_due:
+                toedit["due"]=new_due
+    
+            if not new_name and not new_due and not new_priority:
+                print("\nNo change is done")
+            else:
+                print("\nTask updated")
+            break
         else:
-            print("\nTask updated")
-        
-    else:
-        print("Invalid task number,Please try again.")
+            print("Invalid task number,Please try again.")
 
 
 def remove_task(tasks):
