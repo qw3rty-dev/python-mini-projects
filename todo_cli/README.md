@@ -36,6 +36,16 @@ A command-line based task manager built in python that allows users to manage da
 - Run the script: python todo.py
 - Use the menu to interact with the program
 
+
+## Project Structure
+```
+todo_cli/
+|-- cli.py                     # CLI interface (menu+input)
+|-- manager.py                 # Core logic (add,remove,edit,filter,etc)
+|-- utils.py                   # Helper functions (JSON handling,input,etc)
+```
+
+
 ## Future improvements
 
 - Improve UI/formatting
