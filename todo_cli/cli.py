@@ -68,6 +68,7 @@ def main():
              input("\nPress enter to return to menu...")
          elif choice==9:
              mg.search_tasks(tasks)
+             save_tasks(tasks)
              input("\nPress enter to return to menu...")
          elif choice==10:
              mg.sort_tasks(tasks)
