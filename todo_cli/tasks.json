@@ -1,1 +1,44 @@
-[]
+[
+    {
+        "task": "Fastapi",
+        "done": false,
+        "priority": "High",
+        "due": "2026-04-09"
+    },
+    {
+        "task": "SQLite",
+        "done": false,
+        "priority": "Medium",
+        "due": "2026-04-11"
+    },
+    {
+        "task": "Postgresql",
+        "done": false,
+        "priority": "Low",
+        "due": "2026-04-15"
+    },
+    {
+        "task": "Jobflow backend",
+        "done": false,
+        "priority": "Low",
+        "due": "2026-04-20"
+    },
+    {
+        "task": "Selenium/playwright",
+        "done": false,
+        "priority": "Medium",
+        "due": "2026-05-01"
+    },
+    {
+        "task": "Git/github",
+        "done": false,
+        "priority": "Medium",
+        "due": "2026-06-01"
+    },
+    {
+        "task": "Notion",
+        "done": false,
+        "priority": "Low",
+        "due": "2026-08-01"
+    }
+]
