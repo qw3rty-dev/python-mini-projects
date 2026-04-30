@@ -1,15 +1,22 @@
-def add(a,b):
-    return a+b
-    
+import os
 
+
+def add(a,b):
+    result= a+b
+    return int(result) if int(result)==result else result
+    
 def sub(a,b):
-    return a-b
+    result= a-b
+    return int(result) if int(result)==result else result
+
 
 def div(a,b):
-    return a/b
+    result= a/b
+    return int(result) if int(result)==result else result
 
 def mul(a,b):
-    return a*b
+    result= a*b
+    return int(result) if int(result)==result else result
 
 def fact(n):
     if(n==0 or n==1):
@@ -21,19 +28,30 @@ def fact(n):
     
 
 def menu():
-    print("""
-          Type:
-          + for ADDITION
-          - for SUBTRACTION
-          * for MULTIPLICATION
-          / for DIVISION
-          f for FACTORIAL
-          . to STOP""")
+    print("\n\n"+"="*40)
+    print("CALCULATOR".center(40))
+    print("="*40)
+    print(
+          f"[+] for ADDITION\n"
+          "[-] for SUBTRACTION\n"
+          "[*] for MULTIPLICATION\n"
+          "[/] for DIVISION\n"
+          "[f] for FACTORIAL\n"
+          "[exit] to EXIT\n"
+          )
+    oplist=["+",'-','*','/',"f","exit"]
+    while True:
+        operation=input("CHOOSE: ").strip().lower()
+        if operation not in oplist :
+            print("INVALID OPERATION")
+            continue
+        return operation
+    
     
 def input_number(msg):
     while True:
         try:
-             return float(input(msg) )
+             return float(input(msg))
         except ValueError:
              print("Invalid number try again")
 def input_int(msg):
@@ -48,42 +66,51 @@ def input_values():
         b= input_number("Enter 2nd number: ")
         return a,b
     
+def clear():
+     os.system("cls" if os.name=="nt" else "clear")
+
+def pause():
+    input("\nPress enter to return to menu")
+
     
 def calculator():
-    oplist=["+",'-','*','/','.',"f","F"]
-    
     while True:
-        menu()
-        operation=input("CHOOSE: ").strip()
-        if operation not in oplist :
-            print("INVALID OPERATION")
-            continue
+        clear()
+        operation=menu()
 
-        if operation==".":
+        if operation=="exit":
             print("Program ended")
             break
            
         if operation.lower()=="f":
-                
-                    try:
-                        a= input_int("ENTER THE NUMBER: ")
-                        print(fact(a))
+            try:
+                a= input_int("ENTER THE NUMBER: ")
+                print(fact(a))
+                pause()
                         
-                    except ValueError as e:
-                        print(e)
-                    continue
+            except ValueError as e:
+                    print(e)
+                    pause()
+            continue
+                    
         a,b= input_values()
         if operation== "+":
-               print(add(a,b))
+            print(add(a,b))
+            pause()
         elif operation== "-":
-               print(sub(a,b))
+            print(sub(a,b))
+            pause()
         elif operation== "*":
-               print(mul(a,b))
+            print(mul(a,b))
+            pause()
         elif operation== "/":
-               try:
+            try:
                 print(div(a,b))
-               except ZeroDivisionError:
-                    print("Can't Divide by zero")    
+                pause()
+            except ZeroDivisionError:
+                print("Can't Divide by zero")    
+                pause()
+                
             
 
 if __name__=="__main__":
