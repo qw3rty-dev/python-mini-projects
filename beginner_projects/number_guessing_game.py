@@ -1,22 +1,27 @@
 from random import randint
+import os
 
 def guessGame():
     while True:
-        print("\t\t\t\t\t===GUESSING GAME===\n" 
-        "\t\t\t\t Guess the number ranging between 1 to 20\n"
-        "\t\t\t\t           You have 3 chances")
+
+        clear()
+        print("\n\n"+"="*40)
+        print("GUESSING GAME".center(40))
+        print("="*40)
+        print("Guess the number ranging between 1 to 20")
+        print("You have 3 chances")
         num=randint(1,20)
-        print(num)
+
         for i in range(1,4):
             while True:
-                 try:
+                try:
                     guess=int(input(f"Guess {i}: "))
                     if guess in range(1,21):
                          break
                     else:
                          print("Enter a number ranging between 1 to 20")
                          
-                 except ValueError:
+                except ValueError:
                     print("Invalid input")
             if logic(num,guess):
                 break
@@ -42,8 +47,9 @@ def logic(num,guess):
         print("Not even close")
     return False
 
+def clear():
+    os.system("cls" if os.name== "nt" else "clear")
     
-
 
 if __name__=="__main__":
     guessGame()
